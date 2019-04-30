@@ -1,5 +1,4 @@
-require_relative '../bin/cfhighlander'
-require_relative '../lib/util/cloudformation.util'
+require 'cfhighlander'
 require 'git'
 require 'pp'
 require 'octokit'
@@ -13,7 +12,7 @@ RSpec.describe Cfhighlander::Util::CloudFormation, "#flattenCloudformation" do
       src_dir = "#{File.dirname(__FILE__)}/data/flatten/src"
       ENV['CFHIGHLANDER_WORKDIR'] = src_dir
 
-      factory = Cfhighlander::Factory::ComponentFactory.new
+      factory = Cfhighlander::Factory::Component.new
       component = factory.loadComponentFromTemplate('c')
       component.load
       component.eval_cfndsl
@@ -31,4 +30,3 @@ RSpec.describe Cfhighlander::Util::CloudFormation, "#flattenCloudformation" do
 
   end
 end
-

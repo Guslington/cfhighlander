@@ -1,7 +1,7 @@
 require 'aws-sdk-cloudformation'
 require 'aws-sdk-s3'
 require 'digest/md5'
-require_relative '../hl_ext/aws_helper'
+require 'cfhighlander/util/aws'
 
 module Cfhighlander
 

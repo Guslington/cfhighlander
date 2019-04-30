@@ -1,0 +1,17 @@
+default:
+
+  administration:
+    actions:
+      - '*'
+    resource: '*'
+    principal:
+      AWS:
+        FnSub: "arn:aws:iam::${AWS::AccountId}:root")
+
+  usage:
+    actions:
+      - '*'
+
+
+keys:
+  - alias: mykey

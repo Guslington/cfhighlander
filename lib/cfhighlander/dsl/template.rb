@@ -1,17 +1,10 @@
-# require all extensions
+require 'cfhighlander/dsl/base'
+require 'cfhighlander/dsl/params'
+require 'cfhighlander/dsl/subcomponent'
+require 'cfhighlander/config/loader'
 
-extensions_folder = "#{File.dirname(__FILE__)}/../hl_ext"
-
-Dir["#{extensions_folder}/*.rb"].each {|f|
-  require f
-}
-
-# require libraries
-
-require_relative './cfhighlander.dsl.base'
-require_relative './cfhighlander.dsl.params'
-require_relative './cfhighlander.dsl.subcomponent'
-require_relative './cfhighlander.config.loader'
+require 'cfhighlander/util/aws'
+require 'cfhighlander/map_providers/helper'
 
 module Cfhighlander
 
@@ -99,7 +92,7 @@ module Cfhighlander
       end
 
       def DynamicMappings(providerName)
-        maps = mappings_provider_maps(providerName, self.config)
+        maps = Cfhighlander::MapProviders::Helper.mappings_provider_maps(providerName, self.config)
         maps.each {|name, map| addMapping(name, map)} unless maps.nil?
       end
 

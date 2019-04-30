@@ -1,6 +1,6 @@
 require 'yaml'
 require 'json'
-require 'util/hash.util'
+require 'cfhighlander/util/hash'
 
 module CfHighlander
   class Tests

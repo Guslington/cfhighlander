@@ -1,4 +1,4 @@
-require_relative './cfhighlander.dsl.base'
+require 'cfhighlander/dsl/base'
 
 module Cfhighlander
 
@@ -133,7 +133,7 @@ module Cfhighlander
       end
 
       def mapProvider
-        mappings_provider(@mapName)
+        Cfhighlander::MapProviders::Helper.mappings_provider(@mapName)
       end
 
     end

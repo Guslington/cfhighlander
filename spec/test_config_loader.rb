@@ -1,4 +1,4 @@
-require_relative '../lib/cfhighlander.config.loader'
+require_relative 'cfhighlander/config/loader'
 
 RSpec.describe Cfhighlander::Config::Loader, "#get_nested_config" do
 

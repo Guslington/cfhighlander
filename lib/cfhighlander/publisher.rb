@@ -1,4 +1,4 @@
-require_relative './cfhighlander.compiler'
+require 'cfhighlander/compiler'
 require 'aws-sdk-s3'
 require 'uri'
 module Cfhighlander

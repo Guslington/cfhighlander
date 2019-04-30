@@ -1,6 +1,4 @@
-LOCAL_CFHIGHLANDER_CACHE_LOCATION = "#{ENV['HOME']}/.cfhighlander/components"
-
-require_relative './cfhighlander.model.templatemeta'
+require 'cfhighlander/model/template_metadata'
 
 module Cfhighlander
 
@@ -12,8 +10,10 @@ module Cfhighlander
         ## First look in local $PWD/components folder
         ## Then search for cached $HOME/.highlander/components
         ## Then search in sources given by dsl
+        @local_cfhighlander_cache_location = "#{ENV['HOME']}/.cfhighlander/components"
+
         default_locations = [
-            LOCAL_CFHIGHLANDER_CACHE_LOCATION,
+            @local_cfhighlander_cache_location,
             File.expand_path('components'),
             File.expand_path('.'),
         ]
@@ -37,7 +37,7 @@ module Cfhighlander
         else
           branch = component_version
         end
-        local_path = "#{LOCAL_CFHIGHLANDER_CACHE_LOCATION}/#{template_name}/#{component_version}"
+        local_path = "#{@local_cfhighlander_cache_location}/#{template_name}/#{component_version}"
         return findTemplateGit(local_path, template_name, component_version, git_url, branch)
 
       end
@@ -86,7 +86,7 @@ module Cfhighlander
         prefix = parts[3]
         s3_key = "#{prefix}/#{component_name}/#{component_version}/#{component_name}.highlander.rb"
         s3_prefix = "#{prefix}/#{component_name}/#{component_version}/"
-        local_destination = "#{LOCAL_CFHIGHLANDER_CACHE_LOCATION}/#{component_name}/#{component_version}"
+        local_destination = "#{@local_cfhighlander_cache_location}/#{component_name}/#{component_version}"
         begin
           s3 = Aws::S3::Client.new({ region: s3_bucket_region(bucket) })
           FileUtils.mkdir_p local_destination unless Dir.exist? local_destination
@@ -149,7 +149,7 @@ module Cfhighlander
 
 
         if not git_url.nil?
-          local_path = "#{LOCAL_CFHIGHLANDER_CACHE_LOCATION}/#{template_location.gsub(':', '_').gsub(/\/+/, '/')}/#{template_version}"
+          local_path = "#{@local_cfhighlander_cache_location}/#{template_location.gsub(':', '_').gsub(/\/+/, '/')}/#{template_version}"
           template_name, location = findTemplateGit(local_path, template_location, template_version, git_url, branch)
           if location.nil?
             raise "Could not resolve component #{template_location}@#{template_version}"

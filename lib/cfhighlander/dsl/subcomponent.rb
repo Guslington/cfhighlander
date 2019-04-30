@@ -1,6 +1,6 @@
-require_relative './cfhighlander.helper'
-require_relative './cfhighlander.dsl.base'
-require_relative './cfhighlander.factory'
+require 'cfhighlander/helper'
+require 'cfhighlander/dsl/base'
+require 'cfhighlander/factory/component'
 require 'cfndsl'
 
 module Cfhighlander
@@ -75,7 +75,7 @@ module Cfhighlander
         build_distribution_url
 
         # load component
-        factory = Cfhighlander::Factory::ComponentFactory.new(@component_sources)
+        factory = Cfhighlander::Factory::Component.new(@component_sources)
         @component_loaded = factory.loadComponentFromTemplate(
             @template,
             @template_version,
@@ -276,7 +276,7 @@ module Cfhighlander
 
         # priority 1 mapping provider keyName - used as lowest priority
         if key_name.nil?
-          provider = mappings_provider(mappings_name)
+          provider = Cfhighlander::MapProviders::Helper.mappings_provider(mappings_name)
           if ((not provider.nil?) and (provider.respond_to?('getDefaultKey')))
             key_name = provider.getDefaultKey
           end
@@ -288,7 +288,7 @@ module Cfhighlander
           # could still be nil after this line
         end
 
-        value = mapping_value(component: component,
+        value = Cfhighlander::MapProviders::Helper.mapping_value(component: component,
             provider_name: mappings_name,
             value_name: param.mapAttribute,
             key_name: key_name

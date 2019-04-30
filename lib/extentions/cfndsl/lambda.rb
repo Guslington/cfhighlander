@@ -1,4 +1,4 @@
-require_relative './iam_helper'
+require 'extentions/cfndsl/iam'
 
 def render_lambda_functions(cfndsl, lambdas, lambda_metadata, distribution)
 

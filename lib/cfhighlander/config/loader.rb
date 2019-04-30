@@ -1,5 +1,3 @@
-require_relative '../hl_ext/common_helper'
-
 module Cfhighlander
 
   module Config

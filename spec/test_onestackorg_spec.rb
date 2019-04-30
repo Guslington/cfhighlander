@@ -1,4 +1,4 @@
-require_relative '../bin/cfhighlander'
+require 'cfhighlander'
 require 'git'
 require 'pp'
 require 'octokit'
@@ -15,7 +15,7 @@ THEONSTACK_COMPONENTS = %w(
   hl-component-rds-postgres
 )
 
-RSpec.describe HighlanderCli, "#run" do
+RSpec.describe Cfhighlander::Cli, "#run" do
 
   def test_repo(current_dir, repo, branch)
     clone_opts = { depth: 1 }
@@ -53,7 +53,7 @@ RSpec.describe HighlanderCli, "#run" do
       File.write "#{ENV['HIGHLANDER_WORKDIR']}/az.mappings.yaml", default_maps.to_yaml
     end
 
-    result = HighlanderCli.start
+    result = Cfhighlander::Cli.start
 
     expect(result).not_to eq(nil)
   end

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'cfhighlander'
+
+if ARGV.include?('help')
+  Cfhighlander::Cli.start(['help','cftest'])
+else
+  ARGV.unshift('cftest')
+  Cfhighlander::Cli.start(ARGV)
+end

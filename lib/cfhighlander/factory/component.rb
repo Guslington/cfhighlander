@@ -1,6 +1,6 @@
-require_relative './cfhighlander.dsl.template'
-require_relative './cfhighlander.factory.templatefinder'
-require_relative './cfhighlander.model.component'
+require 'cfhighlander/dsl/template'
+require 'cfhighlander/factory/templatefinder'
+require 'cfhighlander/model/component'
 require 'fileutils'
 require 'git'
 
@@ -9,7 +9,7 @@ module Cfhighlander
 
   module Factory
 
-    class ComponentFactory
+    class Component
 
       attr_accessor :component_sources
 

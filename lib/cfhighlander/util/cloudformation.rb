@@ -1,5 +1,5 @@
-require_relative '../cfhighlander.model.component'
-require_relative './debug.util'
+require 'cfhighlander/model/component'
+require 'cfhighlander/util/debug'
 require 'duplicate'
 
 module Cfhighlander

@@ -10,8 +10,8 @@ require 'net/http'
 require 'net/https'
 require 'highline/import'
 require 'zip'
-require_relative './util/zip.util'
-require_relative './util/cloudformation.util'
+require 'cfhighlander/util/zip'
+require 'cfhighlander/util/cloudformation'
 
 module Cfhighlander
 
@@ -50,7 +50,7 @@ module Cfhighlander
         @process_lambdas = true
 
         if @@global_extensions_paths.empty?
-          global_extensions_folder = "#{File.dirname(__FILE__)}/../cfndsl_ext"
+          global_extensions_folder = "#{File.dirname(__FILE__)}/../extentions/cfndsl"
           Dir["#{global_extensions_folder}/*.rb"].each {|f| @@global_extensions_paths << f}
         end
 
@@ -85,7 +85,7 @@ module Cfhighlander
         component_cfndsl.gsub!("\n", "\n\t")
         component_cfndsl.gsub!("\r\n", "\r\n\t")
         # render cfndsl
-        renderer = ERB.new(File.read("#{__dir__}/../templates/cfndsl.component.template.erb"), nil, '-')
+        renderer = ERB.new(File.read("#{__dir__}/templates/cfndsl.component.template.erb"), nil, '-')
         cfn_template = renderer.result(OpenStruct.new({
             'dsl' => dsl,
             'component_cfndsl' => component_cfndsl,
